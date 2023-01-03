@@ -1,9 +1,22 @@
+import axios from "axios";
 import React, { useState } from "react";
 import { Main, InputContainer, SubmitContainer, LinkContainer } from "./styles";
 
 export default function Home() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  function login(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const res = axios.post(
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-in",
+      {
+        email: email,
+        password: password,
+      }
+    );
+    res.then((res) => console.log(res));
+    res.catch((err) => console.log(err.res));
+  }
   return (
     <Main>
       <div>
@@ -11,7 +24,7 @@ export default function Home() {
         <h2>save, share and discover the best links on the web</h2>
       </div>
       <div>
-        <form>
+        <form onSubmit={login}>
           <InputContainer
             type={"email"}
             placeholder={"email"}

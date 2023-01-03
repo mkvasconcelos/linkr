@@ -1,11 +1,26 @@
 import React, { useState } from "react";
 import { Main, InputContainer, SubmitContainer, LinkContainer } from "./styles";
+import axios from "axios";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  function signUp(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    const res = axios.post(
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/linkr/sign-up",
+      {
+        email: email,
+        password: password,
+        username: username,
+        pictureUrl: image,
+      }
+    );
+    res.then((res) => console.log(res));
+    res.catch((err) => console.log(err.res));
+  }
   return (
     <Main>
       <div>
@@ -13,7 +28,7 @@ export default function SignUp() {
         <h2>save, share and discover the best links on the web</h2>
       </div>
       <div>
-        <form>
+        <form onSubmit={signUp}>
           <InputContainer
             type={"email"}
             placeholder={"email"}
