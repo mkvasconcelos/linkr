@@ -1,10 +1,15 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { ImageContext, TokenContext } from "../contexts/contexts";
 import { Main, InputContainer, SubmitContainer, LinkContainer } from "./styles";
 
 export default function Home() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
+  const { setImage } = useContext(ImageContext);
+  const { setToken } = useContext(TokenContext);
+  const navigate = useNavigate();
   function login(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const res = axios.post(
@@ -14,7 +19,11 @@ export default function Home() {
         password: password,
       }
     );
-    res.then((res) => console.log(res));
+    res.then((res) => {
+      navigate("/timeline");
+      setImage(res.data.user.avatar);
+      setToken(res.data.token);
+    });
     res.catch((err) => console.log(err.res));
   }
   return (

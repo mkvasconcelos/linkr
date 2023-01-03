@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { Main, InputContainer, SubmitContainer, LinkContainer } from "./styles";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 export default function SignUp() {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [username, setUsername] = useState<string>("");
   const [image, setImage] = useState<string>("");
+  const navigate = useNavigate();
   function signUp(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     const res = axios.post(
@@ -18,7 +20,9 @@ export default function SignUp() {
         pictureUrl: image,
       }
     );
-    res.then((res) => console.log(res));
+    res.then((res) => {
+      navigate("/");
+    });
     res.catch((err) => console.log(err.res));
   }
   return (
