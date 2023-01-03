@@ -5,5 +5,6 @@ export const colors = {
     secondaryColor: "#333333",
     primaryColorText: "white",
     secondaryColorText: "#9F9F9F",
+    buttonColor: "#1877F2",
   },
 };
