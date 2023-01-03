@@ -1,40 +1,8 @@
-import React, { useState } from "react";
-import { colors } from "../constants/colors";
 import styled from "styled-components";
+import { colors } from "../constants/colors";
+import { Link } from "react-router-dom";
 
-export default function HomeDesktop() {
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  return (
-    <Main>
-      <div>
-        <h1>linkr</h1>
-        <h2>save, share and discover the best links on the web</h2>
-      </div>
-      <div>
-        <form>
-          <InputContainer
-            type={"email"}
-            placeholder={"email"}
-            value={email}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setEmail(e.target.value)
-            }></InputContainer>
-          <InputContainer
-            type={"password"}
-            placeholder={"password"}
-            value={password}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setPassword(e.target.value)
-            }></InputContainer>
-          <SubmitContainer type={"submit"} value={"Login"}></SubmitContainer>
-        </form>
-      </div>
-    </Main>
-  );
-}
-
-const Main = styled.div`
+export const Main = styled.div`
   height: 100vh;
   color: ${colors.dark.primaryColorText};
   display: flex;
@@ -63,7 +31,7 @@ const Main = styled.div`
   }
 `;
 
-const InputContainer = styled.input`
+export const InputContainer = styled.input`
   width: 90%;
   height: 65px;
   font-family: "Oswald", sans-serif, Arial, Helvetica, sans-serif;
@@ -79,7 +47,7 @@ const InputContainer = styled.input`
   }
 `;
 
-const SubmitContainer = styled.input`
+export const SubmitContainer = styled.input`
   width: 90%;
   height: 65px;
   font-family: "Oswald", sans-serif, Arial, Helvetica, sans-serif;
@@ -89,4 +57,12 @@ const SubmitContainer = styled.input`
   margin-bottom: 10px;
   border-radius: 6px;
   border: none;
+`;
+
+export const LinkContainer = styled(Link)`
+  color: ${colors.dark.primaryColorText};
+  h3 {
+    font-size: 20px;
+    font-weight: 400;
+  }
 `;
